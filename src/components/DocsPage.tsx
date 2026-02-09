@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { CalculatorIcon, CalculusPadIcon, GraphIcon, IntegralIcon, MatrixIcon, StatsIcon } from './shared/Icons';
+
+const base = import.meta.env.BASE_URL;
 
 const sections = [
   { id: 'overview', label: 'Overview', tooltip: 'Features, capabilities, and quick stats' },
@@ -63,28 +65,39 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode; titl
 const calculatorTabs = ['scientific', 'graphing', 'calculus', 'matrix', 'statistics'];
 
 export default function DocsPage() {
-  const [activeSection, setActiveSection] = useState('overview');
   const location = useLocation();
+  const segment = location.pathname.replace(/^\/docs\/?/, '');
+  const [activeSection, setActiveSection] = useState(segment || 'overview');
+  const suppressSpy = useRef(false);
 
-  // Hash-based scroll on mount / hash change
+  // Scroll to section on mount / path change (e.g. /#/docs/calculus)
   useEffect(() => {
-    const hash = location.hash.replace('#', '');
-    if (hash) {
-      const el = document.getElementById(hash);
+    if (!segment) return;
+
+    suppressSpy.current = true;
+
+    // Use requestAnimationFrame to ensure DOM is rendered, then scroll
+    requestAnimationFrame(() => {
+      const el = document.getElementById(segment);
       if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+        el.scrollIntoView({ behavior: 'instant' });
+        setActiveSection(segment);
       }
-    }
-  }, [location.hash]);
+      // Re-enable scroll-spy after scroll settles
+      setTimeout(() => {
+        suppressSpy.current = false;
+      }, 500);
+    });
+  }, [segment]);
 
   // Scroll-spy with IntersectionObserver
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (suppressSpy.current) return;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
-            history.replaceState(null, '', `#${entry.target.id}`);
           }
         }
       },
@@ -220,7 +233,7 @@ export default function DocsPage() {
             </p>
 
             <img
-              src="/docs/scientific-tab.png"
+              src={`${base}docs/scientific-tab.png`}
               alt="Scientific calculator"
               className="mb-6 w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
             />
@@ -295,7 +308,7 @@ export default function DocsPage() {
             </p>
 
             <img
-              src="/docs/graph-tab.png"
+              src={`${base}docs/graph-tab.png`}
               alt="Graphing tab showing sin(x), x^2, and cos(x) plotted"
               className="mb-6 w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
             />
@@ -331,7 +344,7 @@ export default function DocsPage() {
             </p>
 
             <img
-              src="/docs/calculus-tab.png"
+              src={`${base}docs/calculus-tab.png`}
               alt="Calculus tab showing derivative, integral, and limit computations"
               className="mb-6 w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
             />
@@ -390,7 +403,7 @@ export default function DocsPage() {
             </p>
 
             <img
-              src="/docs/matrix-tab.png"
+              src={`${base}docs/matrix-tab.png`}
               alt="Matrix tab showing determinant computation"
               className="mb-6 w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
             />
@@ -467,7 +480,7 @@ export default function DocsPage() {
             </p>
 
             <img
-              src="/docs/stats-tab.png"
+              src={`${base}docs/stats-tab.png`}
               alt="Statistics tab showing descriptive stats and histogram"
               className="mb-6 w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
             />
@@ -587,22 +600,22 @@ export default function DocsPage() {
                 </p>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <img
-                    src="/docs/mobile-scientific.png"
+                    src={`${base}docs/mobile-scientific.png`}
                     alt="Mobile scientific calculator with bottom tab bar"
                     className="rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
                   />
                   <img
-                    src="/docs/mobile-graphing.png"
+                    src={`${base}docs/mobile-graphing.png`}
                     alt="Mobile graphing view with stacked layout"
                     className="rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
                   />
                   <img
-                    src="/docs/mobile-calculus.png"
+                    src={`${base}docs/mobile-calculus.png`}
                     alt="Mobile calculus view with stacked inputs"
                     className="rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
                   />
                   <img
-                    src="/docs/mobile-drawer.png"
+                    src={`${base}docs/mobile-drawer.png`}
                     alt="Mobile slide-over drawer with variables and history"
                     className="rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
                   />
@@ -620,7 +633,7 @@ export default function DocsPage() {
                   switch to their horizontal side-by-side layout.
                 </p>
                 <img
-                  src="/docs/tablet-graphing.png"
+                  src={`${base}docs/tablet-graphing.png`}
                   alt="Tablet graphing view with sidebar and horizontal layout"
                   className="w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
                 />
@@ -633,7 +646,7 @@ export default function DocsPage() {
                   history, and inner panels in their full side-by-side layout. No toggle button is needed.
                 </p>
                 <img
-                  src="/docs/desktop-graphing.png"
+                  src={`${base}docs/desktop-graphing.png`}
                   alt="Desktop graphing view with all panels visible"
                   className="w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
                 />
@@ -692,7 +705,7 @@ export default function DocsPage() {
             </p>
 
             <img
-              src="/docs/dark-mode.png"
+              src={`${base}docs/dark-mode.png`}
               alt="Calculus Pad in dark mode"
               className="w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
             />

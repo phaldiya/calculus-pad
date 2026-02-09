@@ -150,7 +150,7 @@ export default function App() {
           <Route path="/matrix" element={<MatrixPanel />} />
           <Route path="/statistics" element={<StatisticsPanel />} />
         </Route>
-        <Route path="/docs" element={<DocsPage />} />
+        <Route path="/docs/*" element={<DocsPage />} />
       </Routes>
     </AppProvider>
   );

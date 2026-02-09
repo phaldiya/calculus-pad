@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer-core';
 
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const BASE = 'http://localhost:5000/calculus-pad/#';
 
 async function main() {
   const browser = await puppeteer.launch({
@@ -12,21 +13,29 @@ async function main() {
   const page = await browser.newPage();
   await page.setViewport({ width: 1400, height: 900 });
 
+  const clickBtn = async (text: string) => {
+    const btns = await page.$$('button');
+    for (const btn of btns) {
+      const t = await btn.evaluate((el) => el.textContent?.trim());
+      if (t === text) {
+        await btn.click();
+        return;
+      }
+    }
+  };
+
   // Graph tab - with equations plotted
-  await page.goto('http://localhost:5000', { waitUntil: 'networkidle0' });
+  await page.goto(`${BASE}/graphing`, { waitUntil: 'networkidle0' });
   await page.waitForSelector('input[placeholder*="sin"]');
 
-  // Add sin(x)
   await page.type('input[placeholder*="sin"]', 'sin(x)');
   await page.click('button[type="submit"]');
   await new Promise((r) => setTimeout(r, 500));
 
-  // Add x^2
   await page.type('input[placeholder*="sin"]', 'x^2');
   await page.click('button[type="submit"]');
   await new Promise((r) => setTimeout(r, 500));
 
-  // Add cos(x)
   await page.type('input[placeholder*="sin"]', 'cos(x)');
   await page.click('button[type="submit"]');
   await new Promise((r) => setTimeout(r, 1500));
@@ -35,22 +44,13 @@ async function main() {
   console.log('Captured graph tab');
 
   // Calculus tab
-  const navButtons = await page.$$('nav button');
-  await navButtons[1].click(); // Calculus
+  await page.goto(`${BASE}/calculus`, { waitUntil: 'networkidle0' });
   await new Promise((r) => setTimeout(r, 500));
 
   // Compute derivative of x^3
   const calcInputs = await page.$$('input[type="text"]');
   await calcInputs[0].type('x^3');
-  const _dxBtn = await page.$('button:not([type="submit"])');
-  const allBtns = await page.$$('button');
-  for (const btn of allBtns) {
-    const text = await btn.evaluate((el) => el.textContent);
-    if (text === 'd/dx') {
-      await btn.click();
-      break;
-    }
-  }
+  await clickBtn('d/dx');
   await new Promise((r) => setTimeout(r, 500));
 
   // Compute integral of x^2 from 0 to 1
@@ -61,14 +61,8 @@ async function main() {
     await integralInputs[3].type('1');
   }
 
-  // Click Compute button for integral
-  for (const btn of await page.$$('button')) {
-    const text = await btn.evaluate((el) => el.textContent);
-    if (text === 'Compute') {
-      await btn.click();
-      break;
-    }
-  }
+  // Click first Compute button for integral
+  await clickBtn('Compute');
   await new Promise((r) => setTimeout(r, 500));
 
   // Compute limit of sin(x)/x as x->0
@@ -82,7 +76,7 @@ async function main() {
   const computeBtns = await page.$$('button');
   let computeCount = 0;
   for (const btn of computeBtns) {
-    const text = await btn.evaluate((el) => el.textContent);
+    const text = await btn.evaluate((el) => el.textContent?.trim());
     if (text === 'Compute') {
       computeCount++;
       if (computeCount === 2) {
@@ -97,14 +91,13 @@ async function main() {
   console.log('Captured calculus tab');
 
   // Matrix tab
-  const navButtons2 = await page.$$('nav button');
-  await navButtons2[2].click(); // Matrix
+  await page.goto(`${BASE}/matrix`, { waitUntil: 'networkidle0' });
   await new Promise((r) => setTimeout(r, 500));
 
   // Fill matrix A with [[1,2],[3,4]]
   const matrixInputs = await page.$$('input[type="number"]');
   if (matrixInputs.length >= 4) {
-    (await matrixInputs[0].triple_click?.()) || (await matrixInputs[0].click({ clickCount: 3 }));
+    await matrixInputs[0].click({ clickCount: 3 });
     await matrixInputs[0].type('1');
     await matrixInputs[1].click({ clickCount: 3 });
     await matrixInputs[1].type('2');
@@ -114,35 +107,18 @@ async function main() {
     await matrixInputs[3].type('4');
   }
 
-  // Click det(A)
-  for (const btn of await page.$$('button')) {
-    const text = await btn.evaluate((el) => el.textContent);
-    if (text === 'det(A)') {
-      await btn.click();
-      break;
-    }
-  }
+  await clickBtn('det(A)');
   await new Promise((r) => setTimeout(r, 300));
-
-  // Click Compute
-  for (const btn of await page.$$('button')) {
-    const text = await btn.evaluate((el) => el.textContent);
-    if (text === 'Compute') {
-      await btn.click();
-      break;
-    }
-  }
+  await clickBtn('Compute');
   await new Promise((r) => setTimeout(r, 1500));
 
   await page.screenshot({ path: 'public/docs/matrix-tab.png' });
   console.log('Captured matrix tab');
 
   // Stats tab
-  const navButtons3 = await page.$$('nav button');
-  await navButtons3[3].click(); // Stats
+  await page.goto(`${BASE}/statistics`, { waitUntil: 'networkidle0' });
   await new Promise((r) => setTimeout(r, 500));
 
-  // Enter data
   const textarea = await page.$('textarea');
   if (textarea) {
     await textarea.type('2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 5, 7, 11, 13, 15');
@@ -152,13 +128,11 @@ async function main() {
   await page.screenshot({ path: 'public/docs/stats-tab.png' });
   console.log('Captured stats tab');
 
-  // Dark mode screenshot
-  // Go back to graph tab
-  const navButtons4 = await page.$$('nav button');
-  await navButtons4[0].click();
+  // Dark mode screenshot - go to graphing and toggle
+  await page.goto(`${BASE}/graphing`, { waitUntil: 'networkidle0' });
   await new Promise((r) => setTimeout(r, 500));
 
-  // Toggle dark mode
+  // Toggle dark mode via header button
   const headerBtns = await page.$$('header button');
   if (headerBtns.length > 0) {
     await headerBtns[0].click();
