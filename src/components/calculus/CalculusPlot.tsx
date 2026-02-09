@@ -1,0 +1,125 @@
+import type { Data, Layout } from 'plotly.js-dist-min';
+import { useMemo } from 'react';
+
+import { useAppContext } from '../../context/AppContext';
+import { evaluateOverRange } from '../../lib/expressionParser';
+import PlotlyWrapper from '../../lib/PlotlyWrapper';
+
+export default function CalculusPlot() {
+  const { state } = useAppContext();
+  const { derivativeExpr, derivativeResult, integralExpr, integralLower, integralUpper } = state.calculus;
+
+  const data = useMemo(() => {
+    const traces: Data[] = [];
+
+    // Plot original function if derivative was computed
+    if (derivativeExpr) {
+      try {
+        const result = evaluateOverRange(derivativeExpr, -10, 10);
+        traces.push({
+          x: result.x,
+          y: result.y,
+          type: 'scatter',
+          mode: 'lines',
+          name: `f(x) = ${derivativeExpr}`,
+          line: { color: '#6366f1', width: 2 },
+        });
+      } catch {
+        /* skip */
+      }
+    }
+
+    // Plot derivative
+    if (derivativeResult) {
+      try {
+        const result = evaluateOverRange(derivativeResult, -10, 10);
+        traces.push({
+          x: result.x,
+          y: result.y,
+          type: 'scatter',
+          mode: 'lines',
+          name: `f'(x) = ${derivativeResult}`,
+          line: { color: '#ef4444', width: 2, dash: 'dash' },
+        });
+      } catch {
+        /* skip */
+      }
+    }
+
+    // Plot integral area
+    if (integralExpr && integralLower && integralUpper) {
+      try {
+        const lower = parseFloat(integralLower);
+        const upper = parseFloat(integralUpper);
+        if (Number.isFinite(lower) && Number.isFinite(upper)) {
+          const result = evaluateOverRange(integralExpr, lower, upper, 200);
+          traces.push({
+            x: [lower, ...result.x, upper],
+            y: [0, ...result.y, 0],
+            type: 'scatter',
+            mode: 'lines',
+            name: `Area`,
+            fill: 'tozeroy',
+            fillcolor: 'rgba(99, 102, 241, 0.2)',
+            line: { color: '#6366f1', width: 1 },
+          });
+
+          // Also plot the full function
+          const full = evaluateOverRange(integralExpr, -10, 10);
+          traces.unshift({
+            x: full.x,
+            y: full.y,
+            type: 'scatter',
+            mode: 'lines',
+            name: `f(x) = ${integralExpr}`,
+            line: { color: '#22c55e', width: 2 },
+          });
+        }
+      } catch {
+        /* skip */
+      }
+    }
+
+    return traces;
+  }, [derivativeExpr, derivativeResult, integralExpr, integralLower, integralUpper]);
+
+  const layout = useMemo<Partial<Layout>>(
+    () => ({
+      autosize: true,
+      margin: { l: 50, r: 20, t: 20, b: 40 },
+      xaxis: {
+        zeroline: true,
+        zerolinecolor: '#94a3b8',
+        gridcolor: state.darkMode ? '#334155' : '#e2e8f0',
+        color: state.darkMode ? '#94a3b8' : '#64748b',
+      },
+      yaxis: {
+        zeroline: true,
+        zerolinecolor: '#94a3b8',
+        gridcolor: state.darkMode ? '#334155' : '#e2e8f0',
+        color: state.darkMode ? '#94a3b8' : '#64748b',
+      },
+      paper_bgcolor: 'transparent',
+      plot_bgcolor: 'transparent',
+      showlegend: true,
+      legend: {
+        x: 0,
+        y: 1,
+        bgcolor: 'transparent',
+        font: { color: state.darkMode ? '#e2e8f0' : '#1e293b', size: 11 },
+      },
+      dragmode: 'pan',
+    }),
+    [state.darkMode],
+  );
+
+  if (data.length === 0) {
+    return (
+      <div className="flex h-full items-center justify-center text-[var(--color-text-secondary)] text-sm">
+        Compute a derivative or integral to see the graph
+      </div>
+    );
+  }
+
+  return <PlotlyWrapper data={data} layout={layout} style={{ width: '100%', height: '100%' }} />;
+}
