@@ -115,8 +115,13 @@ export default function CalculusPlot() {
 
   if (data.length === 0) {
     return (
-      <div className="flex h-full items-center justify-center text-[var(--color-text-secondary)] text-sm">
-        Compute a derivative or integral to see the graph
+      <div className="relative h-full w-full">
+        <PlotlyWrapper data={[]} layout={layout} style={{ width: '100%', height: '100%' }} />
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <span className="rounded-lg bg-[var(--color-surface)] px-4 py-2 text-[var(--color-text-secondary)] text-sm opacity-60">
+            Compute a derivative or integral to see the graph
+          </span>
+        </div>
       </div>
     );
   }

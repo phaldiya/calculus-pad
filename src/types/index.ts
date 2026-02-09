@@ -119,6 +119,10 @@ export type AppAction =
   | { type: 'SET_STATISTICS'; updates: Partial<StatisticsState> }
   | { type: 'ADD_HISTORY'; entry: HistoryEntry }
   | { type: 'CLEAR_HISTORY' }
+  | { type: 'CLEAR_EQUATIONS' }
+  | { type: 'CLEAR_CALCULUS' }
+  | { type: 'CLEAR_MATRIX' }
+  | { type: 'CLEAR_STATISTICS' }
   | { type: 'ADD_VARIABLE'; variable: Variable }
   | { type: 'UPDATE_VARIABLE'; name: string; value: number }
   | { type: 'REMOVE_VARIABLE'; name: string }

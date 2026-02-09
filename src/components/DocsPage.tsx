@@ -327,6 +327,7 @@ export default function DocsPage() {
             <p className="mb-4 text-slate-500 dark:text-slate-400">
               Click <CodeBlock>+ Plot custom points</CodeBlock> to enter (x, y) coordinate pairs manually. Choose
               between scatter, line, or both display modes. Points appear as an additional trace overlaid on the graph.
+              Use <CodeBlock>Clear All</CodeBlock> to remove all equations and point datasets at once.
             </p>
 
             <div className="rounded-xl bg-indigo-50 p-4 text-indigo-700 text-sm dark:bg-indigo-950 dark:text-indigo-300">
@@ -340,7 +341,8 @@ export default function DocsPage() {
             <h2 className="mb-2 font-bold text-2xl text-slate-800 dark:text-white">Calculus</h2>
             <p className="mb-6 text-slate-500 dark:text-slate-400">
               Perform symbolic differentiation, numerical integration, and limit computation. Results are visualized
-              alongside the original function on the graph.
+              alongside the original function on the graph. Use <CodeBlock>Clear All</CodeBlock> to reset all inputs and
+              results.
             </p>
 
             <img
@@ -399,7 +401,7 @@ export default function DocsPage() {
             <p className="mb-6 text-slate-500 dark:text-slate-400">
               Perform matrix operations on matrices up to 5x5. Resize matrices dynamically using the row/column
               selectors. Operations that only need one matrix (determinant, inverse, transpose) automatically hide
-              Matrix B.
+              Matrix B. Use <CodeBlock>Clear All</CodeBlock> to reset matrices and results to defaults.
             </p>
 
             <img
@@ -476,7 +478,7 @@ export default function DocsPage() {
             <h2 className="mb-2 font-bold text-2xl text-slate-800 dark:text-white">Statistics</h2>
             <p className="mb-6 text-slate-500 dark:text-slate-400">
               Enter numerical data to instantly see descriptive statistics and a distribution histogram. Switch to X,Y
-              pairs mode for regression analysis.
+              pairs mode for regression analysis. Use <CodeBlock>Clear All</CodeBlock> to reset all data and results.
             </p>
 
             <img

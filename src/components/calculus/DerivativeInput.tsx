@@ -73,23 +73,21 @@ export default function DerivativeInput() {
       <h3 id="deriv-heading" className="font-semibold text-[var(--color-text)] text-sm">
         Derivative
       </h3>
-      <div className="flex gap-2">
-        <input
-          type="text"
-          value={state.calculus.derivativeExpr}
-          onChange={(e) => dispatch({ type: 'SET_CALCULUS', updates: { derivativeExpr: e.target.value } })}
-          placeholder="e.g. x^3, sin(x)"
-          aria-label="Derivative expression"
-          className="flex-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)] px-3 py-2 text-[var(--color-text)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-        />
-        <button
-          type="button"
-          onClick={handleCompute}
-          className="rounded-lg bg-[var(--color-primary)] px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-[var(--color-primary-hover)]"
-        >
-          d/dx
-        </button>
-      </div>
+      <input
+        type="text"
+        value={state.calculus.derivativeExpr}
+        onChange={(e) => dispatch({ type: 'SET_CALCULUS', updates: { derivativeExpr: e.target.value } })}
+        placeholder="e.g. x^3, sin(x)"
+        aria-label="Derivative expression"
+        className="rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)] px-3 py-2 text-[var(--color-text)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+      />
+      <button
+        type="button"
+        onClick={handleCompute}
+        className="self-end rounded-lg bg-[var(--color-primary)] px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-[var(--color-primary-hover)]"
+      >
+        d/dx
+      </button>
       {error && (
         <p role="alert" className="text-[var(--color-error)] text-xs">
           {error}

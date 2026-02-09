@@ -47,7 +47,20 @@ export default function MatrixPanel() {
 
   return (
     <div role="region" aria-label="Matrix calculator" className="flex h-full flex-col overflow-y-auto p-6">
-      <h2 className="mb-4 font-semibold text-[var(--color-text)] text-lg">Matrix Calculator</h2>
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="font-semibold text-[var(--color-text)] text-lg">Matrix Calculator</h2>
+        <button
+          type="button"
+          onClick={() => {
+            dispatch({ type: 'CLEAR_MATRIX' });
+            setSteps([]);
+            setShowSteps(false);
+          }}
+          className="rounded px-2 py-0.5 text-[var(--color-text-secondary)] text-xs transition-colors hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-error)]"
+        >
+          Clear All
+        </button>
+      </div>
       <div className="flex flex-wrap gap-6">
         <MatrixInput
           label="Matrix A"

@@ -102,6 +102,13 @@ export default function GraphPlot() {
         onHover={handleHover}
         onUnhover={handleUnhover}
       />
+      {data.length === 0 && (
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <span className="rounded-lg bg-[var(--color-surface)] px-4 py-2 text-[var(--color-text-secondary)] text-sm opacity-60">
+            Add an equation to see the graph
+          </span>
+        </div>
+      )}
     </div>
   );
 }

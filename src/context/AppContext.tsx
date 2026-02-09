@@ -107,6 +107,18 @@ function appReducer(state: AppState, action: AppAction): AppState {
     case 'CLEAR_HISTORY':
       return { ...state, history: [] };
 
+    case 'CLEAR_EQUATIONS':
+      return { ...state, equations: [], pointDataSets: [] };
+
+    case 'CLEAR_CALCULUS':
+      return { ...state, calculus: initialCalculus };
+
+    case 'CLEAR_MATRIX':
+      return { ...state, matrix: initialMatrix };
+
+    case 'CLEAR_STATISTICS':
+      return { ...state, statistics: initialStatistics };
+
     case 'ADD_VARIABLE':
       return { ...state, variables: [...state.variables, action.variable] };
 

@@ -31,6 +31,15 @@ export default function StatisticsPanel() {
         aria-label="Statistics inputs"
         className="flex max-h-[40vh] w-full flex-col gap-4 overflow-y-auto border-[var(--color-border)] border-b p-4 md:max-h-none md:w-80 md:border-r md:border-b-0"
       >
+        {(state.statistics.data.length > 0 || state.statistics.xyData.length > 0) && (
+          <button
+            type="button"
+            onClick={() => dispatch({ type: 'CLEAR_STATISTICS' })}
+            className="self-end rounded px-2 py-0.5 text-[var(--color-text-secondary)] text-xs transition-colors hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-error)]"
+          >
+            Clear All
+          </button>
+        )}
         <DataInput />
         <StatsResults results={state.statistics.results} />
         <div className="border-[var(--color-border)] border-t pt-3">

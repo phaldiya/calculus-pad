@@ -85,7 +85,7 @@ export default function LimitInput() {
           onChange={(e) => dispatch({ type: 'SET_CALCULUS', updates: { limitExpr: e.target.value } })}
           placeholder="e.g. sin(x)/x"
           aria-label="Limit expression"
-          className="flex-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)] px-3 py-2 text-[var(--color-text)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+          className="min-w-0 w-1/2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)] px-3 py-2 text-[var(--color-text)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
         />
         <input
           type="text"
@@ -93,16 +93,16 @@ export default function LimitInput() {
           onChange={(e) => dispatch({ type: 'SET_CALCULUS', updates: { limitPoint: e.target.value } })}
           placeholder="x ->"
           aria-label="Limit point"
-          className="w-20 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)] px-3 py-2 text-[var(--color-text)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+          className="min-w-0 w-1/2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-alt)] px-3 py-2 text-[var(--color-text)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
         />
-        <button
-          type="button"
-          onClick={handleCompute}
-          className="rounded-lg bg-[var(--color-primary)] px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-[var(--color-primary-hover)]"
-        >
-          Compute
-        </button>
       </div>
+      <button
+        type="button"
+        onClick={handleCompute}
+        className="self-end rounded-lg bg-[var(--color-primary)] px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-[var(--color-primary-hover)]"
+      >
+        Compute
+      </button>
       {error && (
         <p role="alert" className="text-[var(--color-error)] text-xs">
           {error}
