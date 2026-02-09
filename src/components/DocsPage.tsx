@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { CalculatorIcon, CalculusPadIcon, GraphIcon, IntegralIcon, MatrixIcon, StatsIcon } from './shared/Icons';
 
@@ -65,14 +65,22 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode; titl
 const calculatorTabs = ['scientific', 'graphing', 'calculus', 'matrix', 'statistics'];
 
 export default function DocsPage() {
+  const navigate = useNavigate();
   const location = useLocation();
   const segment = location.pathname.replace(/^\/docs\/?/, '');
   const [activeSection, setActiveSection] = useState(segment || 'overview');
   const suppressSpy = useRef(false);
+  const isUserNav = useRef(false);
 
   // Scroll to section on mount / path change (e.g. /#/docs/calculus)
   useEffect(() => {
     if (!segment) return;
+
+    // Skip scroll when the URL change came from nav click or scroll-spy
+    if (isUserNav.current) {
+      isUserNav.current = false;
+      return;
+    }
 
     suppressSpy.current = true;
 
@@ -92,12 +100,15 @@ export default function DocsPage() {
 
   // Scroll-spy with IntersectionObserver
   useEffect(() => {
+    const navigateRef = navigate;
     const observer = new IntersectionObserver(
       (entries) => {
         if (suppressSpy.current) return;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
+            isUserNav.current = true;
+            navigateRef(`/docs/${entry.target.id}`, { replace: true });
           }
         }
       },
@@ -110,10 +121,17 @@ export default function DocsPage() {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [navigate]);
 
   const scrollTo = (id: string) => {
+    suppressSpy.current = true;
+    setActiveSection(id);
+    isUserNav.current = true;
+    navigate(`/docs/${id}`, { replace: true });
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      suppressSpy.current = false;
+    }, 800);
   };
 
   const appRoute = calculatorTabs.includes(activeSection) ? `/${activeSection}` : '/scientific';

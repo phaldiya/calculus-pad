@@ -12,7 +12,7 @@ export default function Header({ onToggleSidebar, sidebarOpen }: HeaderProps) {
   const { state, dispatch } = useAppContext();
   const location = useLocation();
   const hash = location.pathname.replace('/', '');
-  const docsTo = hash && hash !== 'docs' ? `/docs#${hash}` : '/docs';
+  const docsTo = hash && hash !== 'docs' ? `/docs/${hash}` : '/docs';
 
   return (
     <header className="flex items-center justify-between border-[var(--color-border)] border-b bg-[var(--color-surface)] px-4 py-2">
