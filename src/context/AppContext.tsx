@@ -51,7 +51,7 @@ const initialState: AppState = {
   darkMode: false,
 };
 
-function appReducer(state: AppState, action: AppAction): AppState {
+export function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
     case 'SET_TAB':
       return { ...state, activeTab: action.tab };
