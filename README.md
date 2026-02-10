@@ -99,6 +99,27 @@ src/
     └── shared/                 # History, Variables, ErrorBoundary
 ```
 
+## Chrome Extension (Side Panel)
+
+Calculus Pad can also run as a Chrome Extension in the browser's side panel.
+
+### Build & Load
+
+```bash
+bun run extension:icons     # generate PNG icons from favicon.svg
+bun run build:extension     # build to dist-extension/
+```
+
+1. Open `chrome://extensions` and enable **Developer mode**
+2. Click **Load unpacked** and select the `dist-extension/` directory
+3. Click the Calculus Pad icon in the toolbar to open the side panel
+
+### Package for Chrome Web Store
+
+```bash
+bun run extension:zip       # produces calculus-pad-extension.zip
+```
+
 ## Quick Verification
 
 | Feature | Test | Expected |
