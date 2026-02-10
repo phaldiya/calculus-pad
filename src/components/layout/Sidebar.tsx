@@ -57,7 +57,7 @@ export default function Sidebar() {
       {/* Mobile: fixed bottom tab bar */}
       <nav
         aria-label="Calculator modes"
-        className="fixed right-0 bottom-0 left-0 z-40 flex border-[var(--color-border)] border-t bg-[var(--color-surface)] md:hidden"
+        className="fixed right-0 bottom-0 left-0 z-40 flex border-[var(--color-border)] border-t bg-[var(--color-surface)] pb-[env(safe-area-inset-bottom)] md:hidden"
       >
         {tabs.map((tab) => {
           const active = location.pathname === tab.path;

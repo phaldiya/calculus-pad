@@ -75,14 +75,14 @@ function CalculatorLayout() {
   }, [sidebarOpen]);
 
   return (
-    <div className="flex h-screen flex-col bg-[var(--color-bg)]">
+    <div className="flex h-dvh flex-col bg-[var(--color-bg)]">
       <a href="#main-content" id="skip-nav">
         Skip to content
       </a>
       <Header onToggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <main id="main-content" className="flex-1 overflow-hidden pb-14 md:pb-0">
+        <main id="main-content" className="flex-1 overflow-hidden pb-16 md:pb-0">
           <ErrorBoundary tabName={tabName}>
             <Outlet />
           </ErrorBoundary>

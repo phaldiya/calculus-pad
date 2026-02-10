@@ -374,7 +374,7 @@ export default function ScientificPanel() {
 
   return (
     <div className="flex h-full">
-      <div className="flex flex-1 items-center justify-center px-3 py-6 sm:px-6">
+      <div className="flex flex-1 items-center justify-start sm:justify-center px-3 py-6 sm:px-6">
         <div ref={wrapperRef} tabIndex={-1} className="flex w-full max-w-lg flex-col gap-3 outline-none">
           {/* Display */}
           <div
