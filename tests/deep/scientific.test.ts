@@ -1,4 +1,4 @@
-import { evaluate } from 'mathjs';
+import { evaluate, parse } from 'mathjs';
 
 import { generateSteps } from '../../src/lib/stepEngine';
 import { highlightTex, safeToTex } from '../../src/lib/texHelpers';
@@ -91,8 +91,6 @@ describe('QA Audit: Scientific - Deep', () => {
 
   describe('texHelpers', () => {
     it('safeToTex handles parse errors gracefully', () => {
-      // safeToTex expects a MathNode, but let's test via a valid node
-      const { parse } = require('mathjs');
       const node = parse('x^2');
       const tex = safeToTex(node);
       expect(typeof tex).toBe('string');
