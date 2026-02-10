@@ -45,6 +45,9 @@ jobs:
 
       - run: bun run build
 
+      - run: bun run build:extension
+      - run: bun run extension:zip
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
@@ -59,3 +62,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: calculus-pad-extension
+          path: calculus-pad-extension.zip
