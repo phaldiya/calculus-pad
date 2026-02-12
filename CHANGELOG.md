@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/phaldiya/calculus-lab/compare/v1.0.1...v1.1.0) (2026-02-12)
+
+
+### Features
+
+* add mobile-statistics screenshot to docs responsive section ([41c01de](https://github.com/phaldiya/calculus-lab/commit/41c01defd1cb75f30ed8f9649835739f023bcb16))
+
 ## [1.0.1](https://github.com/phaldiya/calculus-pad/compare/v1.0.0...v1.0.1) (2026-02-10)
 
 
