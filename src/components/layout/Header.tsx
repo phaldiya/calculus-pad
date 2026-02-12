@@ -17,7 +17,7 @@ export default function Header({ onToggleSidebar, sidebarOpen }: HeaderProps) {
   return (
     <header className="flex items-center justify-between border-[var(--color-border)] border-b bg-[var(--color-surface)] px-4 py-2">
       <div className="flex items-center gap-2">
-        <CalculusLabIcon className="h-6 w-6 text-[var(--color-primary)]" />
+        <CalculusLabIcon className="h-7 w-7 rounded" />
         <h1 className="font-semibold text-[var(--color-text)] text-lg">Calculus Lab</h1>
       </div>
       <div className="flex items-center gap-2">

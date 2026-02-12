@@ -1,13 +1,20 @@
-import { useAppContext } from "../../context/AppContext";
-import CalculusPlot from "./CalculusPlot";
-import DerivativeInput from "./DerivativeInput";
-import IntegralInput from "./IntegralInput";
-import LimitInput from "./LimitInput";
+import { useAppContext } from '../../context/AppContext';
+import CalculusPlot from './CalculusPlot';
+import DerivativeInput from './DerivativeInput';
+import IntegralInput from './IntegralInput';
+import LimitInput from './LimitInput';
 
 export default function CalculusPanel() {
   const { state, dispatch } = useAppContext();
   const c = state.calculus;
-  const hasData = !!(c.derivativeExpr || c.derivativeResult || c.integralExpr || c.integralResult || c.limitExpr || c.limitResult);
+  const hasData = !!(
+    c.derivativeExpr ||
+    c.derivativeResult ||
+    c.integralExpr ||
+    c.integralResult ||
+    c.limitExpr ||
+    c.limitResult
+  );
 
   return (
     <div className="flex h-full flex-col md:flex-row">
@@ -29,11 +36,7 @@ export default function CalculusPanel() {
         <IntegralInput />
         <LimitInput />
       </div>
-      <div
-        role="img"
-        aria-label="Calculus plot"
-        className="min-h-[300px] flex-1"
-      >
+      <div role="img" aria-label="Calculus plot" className="min-h-[300px] flex-1">
         <CalculusPlot />
       </div>
     </div>

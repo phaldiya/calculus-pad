@@ -1,6 +1,6 @@
-import type { AppState } from "../types";
+import type { AppState } from '../types';
 
-const STORAGE_KEY = "calculus-lab-state";
+const STORAGE_KEY = 'calculus-lab-state';
 
 export function saveState(state: AppState): void {
   try {

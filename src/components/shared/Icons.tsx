@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -18,23 +18,9 @@ export function CloseIcon(props: IconProps) {
   );
 }
 
-export function CalculusLabIcon(props: IconProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <rect x="5" y="2" width="16" height="20" rx="2" />
-      <path d="M14 6.5C14 5.67 13.33 5 12.5 5S11 5.67 11 6.5v11c0 .83-.67 1.5-1.5 1.5S8 18.33 8 17.5" />
-      <path d="M15.5 13v2l-1.5 3h4l-1.5-3v-2" strokeWidth="1" />
-      <line x1="15.5" y1="13" x2="16.5" y2="13" strokeWidth="1" />
-    </svg>
-  );
+export function CalculusLabIcon({ className }: { className?: string }) {
+  const base = import.meta.env.BASE_URL;
+  return <img src={`${base}favicon.svg`} alt="Calculus Lab" className={className} />;
 }
 
 export function GraphIcon(props: IconProps) {
@@ -78,13 +64,7 @@ export function CalculatorIcon(props: IconProps) {
 
 export function IntegralIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      {...props}
-    >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
       <path d="M12 3c-1.5 0-2.5 1-2.5 2.5v13c0 1.5-1 2.5-2.5 2.5" />
     </svg>
   );
@@ -92,13 +72,7 @@ export function IntegralIcon(props: IconProps) {
 
 export function MatrixIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      {...props}
-    >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
       <rect x="3" y="3" width="7" height="7" rx="1" />
       <rect x="14" y="3" width="7" height="7" rx="1" />
       <rect x="3" y="14" width="7" height="7" rx="1" />
@@ -109,13 +83,7 @@ export function MatrixIcon(props: IconProps) {
 
 export function StatsIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      {...props}
-    >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
       <rect x="3" y="12" width="4" height="9" />
       <rect x="10" y="7" width="4" height="14" />
       <rect x="17" y="3" width="4" height="18" />
@@ -125,13 +93,7 @@ export function StatsIcon(props: IconProps) {
 
 export function SunIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      {...props}
-    >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
       <circle cx="12" cy="12" r="5" />
       <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
     </svg>
@@ -140,13 +102,7 @@ export function SunIcon(props: IconProps) {
 
 export function MoonIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      {...props}
-    >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   );
