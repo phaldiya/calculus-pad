@@ -24,6 +24,21 @@ async function main() {
     }
   };
 
+  // Scientific tab
+  await page.goto(`${BASE}/scientific`, { waitUntil: 'networkidle0' });
+  await new Promise((r) => setTimeout(r, 1000));
+
+  // Type a calculation to show the calculator in action
+  const sciInput = await page.$('input[type="text"]');
+  if (sciInput) {
+    await sciInput.type('sin(45)');
+  }
+  await clickBtn('=');
+  await new Promise((r) => setTimeout(r, 500));
+
+  await page.screenshot({ path: 'public/docs/scientific-tab.png' });
+  console.log('Captured scientific tab');
+
   // Graph tab - with equations plotted
   await page.goto(`${BASE}/graphing`, { waitUntil: 'networkidle0' });
   await page.waitForSelector('input[placeholder*="sin"]');
@@ -141,6 +156,92 @@ async function main() {
 
   await page.screenshot({ path: 'public/docs/dark-mode.png' });
   console.log('Captured dark mode');
+
+  // Toggle dark mode back to light
+  const headerBtns2 = await page.$$('header button');
+  if (headerBtns2.length > 0) {
+    await headerBtns2[0].click();
+  }
+  await new Promise((r) => setTimeout(r, 500));
+
+  // --- Responsive screenshots ---
+
+  // Desktop graphing (1280px) - plot some equations first
+  await page.setViewport({ width: 1280, height: 900 });
+  await page.goto(`${BASE}/graphing`, { waitUntil: 'networkidle0' });
+  await page.waitForSelector('input[placeholder*="sin"]');
+
+  await page.type('input[placeholder*="sin"]', 'sin(x)');
+  await page.click('button[type="submit"]');
+  await new Promise((r) => setTimeout(r, 500));
+
+  await page.type('input[placeholder*="sin"]', 'x^2');
+  await page.click('button[type="submit"]');
+  await new Promise((r) => setTimeout(r, 1500));
+
+  await page.screenshot({ path: 'public/docs/desktop-graphing.png' });
+  console.log('Captured desktop graphing');
+
+  // Tablet graphing (768px)
+  await page.setViewport({ width: 768, height: 1024 });
+  await page.goto(`${BASE}/graphing`, { waitUntil: 'networkidle0' });
+  await page.waitForSelector('input[placeholder*="sin"]');
+
+  await page.type('input[placeholder*="sin"]', 'sin(x)');
+  await page.click('button[type="submit"]');
+  await new Promise((r) => setTimeout(r, 1500));
+
+  await page.screenshot({ path: 'public/docs/tablet-graphing.png' });
+  console.log('Captured tablet graphing');
+
+  // Mobile screenshots (375px)
+  await page.setViewport({ width: 375, height: 812 });
+
+  // Mobile scientific
+  await page.goto(`${BASE}/scientific`, { waitUntil: 'networkidle0' });
+  await new Promise((r) => setTimeout(r, 1000));
+  await page.screenshot({ path: 'public/docs/mobile-scientific.png' });
+  console.log('Captured mobile scientific');
+
+  // Mobile graphing
+  await page.goto(`${BASE}/graphing`, { waitUntil: 'networkidle0' });
+  await new Promise((r) => setTimeout(r, 1000));
+  await page.screenshot({ path: 'public/docs/mobile-graphing.png' });
+  console.log('Captured mobile graphing');
+
+  // Mobile calculus
+  await page.goto(`${BASE}/calculus`, { waitUntil: 'networkidle0' });
+  await new Promise((r) => setTimeout(r, 1000));
+  await page.screenshot({ path: 'public/docs/mobile-calculus.png' });
+  console.log('Captured mobile calculus');
+
+  // Mobile statistics
+  await page.goto(`${BASE}/statistics`, { waitUntil: 'networkidle0' });
+  await new Promise((r) => setTimeout(r, 1000));
+  await page.screenshot({ path: 'public/docs/mobile-statistics.png' });
+  console.log('Captured mobile statistics');
+
+  // Mobile drawer - open the right panel drawer
+  await page.goto(`${BASE}/scientific`, { waitUntil: 'networkidle0' });
+  await new Promise((r) => setTimeout(r, 500));
+
+  // Click the panel toggle button in the header to open the drawer
+  const panelToggle = await page.$(
+    'header button[aria-label*="panel"], header button[aria-label*="Panel"], header button[aria-label*="sidebar"], header button[aria-label*="Sidebar"]',
+  );
+  if (panelToggle) {
+    await panelToggle.click();
+  } else {
+    // Fallback: try the last button in header (usually the panel toggle)
+    const allHeaderBtns = await page.$$('header button');
+    if (allHeaderBtns.length > 1) {
+      await allHeaderBtns[allHeaderBtns.length - 1].click();
+    }
+  }
+  await new Promise((r) => setTimeout(r, 1000));
+
+  await page.screenshot({ path: 'public/docs/mobile-drawer.png' });
+  console.log('Captured mobile drawer');
 
   await browser.close();
   console.log('All screenshots captured!');

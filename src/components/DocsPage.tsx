@@ -142,7 +142,7 @@ export default function DocsPage() {
       <header className="sticky top-0 z-50 border-slate-200 border-b bg-white/80 backdrop-blur-lg dark:border-slate-800 dark:bg-slate-950/80">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <CalculusLabIcon className="h-7 w-7 text-indigo-500" />
+            <CalculusLabIcon className="h-8 w-8 rounded" />
             <h1 className="font-bold text-slate-800 text-xl dark:text-white">Calculus Lab</h1>
             <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-medium text-indigo-700 text-xs dark:bg-indigo-900 dark:text-indigo-300">
               Docs
@@ -193,8 +193,8 @@ export default function DocsPage() {
                 A powerful graphing calculator in your browser
               </h2>
               <p className="max-w-2xl text-lg text-slate-500 dark:text-slate-400">
-                Calculus Lab is a full-featured mathematical toolkit built with React. Plot functions, compute derivatives
-                and integrals, perform matrix operations, and analyze statistical data — all in one place.
+                Calculus Lab is a full-featured mathematical toolkit built with React. Plot functions, compute
+                derivatives and integrals, perform matrix operations, and analyze statistical data — all in one place.
               </p>
             </div>
 
@@ -618,7 +618,7 @@ export default function DocsPage() {
                   (variables &amp; history) is hidden and accessible via a slide-over drawer triggered by the panel icon
                   in the header. Inner panels stack vertically — inputs on top, plots below.
                 </p>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
                   <img
                     src={`${base}docs/mobile-scientific.png`}
                     alt="Mobile scientific calculator with bottom tab bar"
@@ -635,13 +635,18 @@ export default function DocsPage() {
                     className="rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
                   />
                   <img
+                    src={`${base}docs/mobile-statistics.png`}
+                    alt="Mobile statistics view with stacked layout"
+                    className="rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
+                  />
+                  <img
                     src={`${base}docs/mobile-drawer.png`}
                     alt="Mobile slide-over drawer with variables and history"
                     className="rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
                   />
                 </div>
                 <p className="mt-2 text-slate-400 text-xs">
-                  Left to right: Calculator, Graphing, Calculus, Variables drawer
+                  Left to right: Calculator, Graphing, Calculus, Statistics, Variables drawer
                 </p>
               </div>
 
