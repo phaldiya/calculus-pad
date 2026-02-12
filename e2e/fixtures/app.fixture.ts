@@ -9,7 +9,7 @@ export class CalcPage {
   }
 
   async goToTab(tab: Tab) {
-    await this.page.goto(`/calculus-pad/#/${tab}`);
+    await this.page.goto(`/calculus-lab/#/${tab}`);
     await this.page.waitForLoadState('networkidle');
   }
 
@@ -66,8 +66,8 @@ export const test = base.extend<{ calcPage: CalcPage }>({
   calcPage: async ({ page, baseURL }, use) => {
     // Clear localStorage before each test to prevent state bleed
     // Navigate to the origin first so we can access localStorage
-    await page.goto(baseURL ?? '/calculus-pad/');
-    await page.evaluate(() => window.localStorage.removeItem('calculus-pad-state'));
+    await page.goto(baseURL ?? '/calculus-lab/');
+    await page.evaluate(() => window.localStorage.removeItem('calculus-lab-state'));
     const calcPage = new CalcPage(page);
     await use(calcPage);
   },

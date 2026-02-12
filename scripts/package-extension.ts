@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const DIST = resolve(ROOT, 'dist-extension');
-const ZIP = resolve(ROOT, 'calculus-pad-extension.zip');
+const ZIP = resolve(ROOT, 'calculus-lab-extension.zip');
 
 if (!existsSync(DIST)) {
   console.error('dist-extension/ not found — run `bun run build:extension` first.');

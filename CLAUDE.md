@@ -1,10 +1,10 @@
 # CLAUDE.md
 
-Project-specific instructions for Claude Code working on Calculus Pad.
+Project-specific instructions for Claude Code working on Calculus Lab.
 
 ## Project Overview
 
-Calculus Pad is a client-side scientific graphing calculator built with React 19, TypeScript, and Plotly.js. No backend — deployed as a static SPA to GitHub Pages.
+Calculus Lab is a client-side scientific graphing calculator built with React 19, TypeScript, and Plotly.js. No backend — deployed as a static SPA to GitHub Pages.
 
 ## Commands
 
@@ -87,5 +87,5 @@ src/
 ## Deployment
 
 - GitHub Pages via `.github/workflows/deploy.yml`
-- Base path: `/calculus-pad/`
+- Base path: `/calculus-lab/`
 - HashRouter for SPA compatibility with static hosting

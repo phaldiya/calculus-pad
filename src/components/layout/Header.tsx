@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import { useAppContext } from '../../context/AppContext';
-import { CalculusPadIcon, CloseIcon, MoonIcon, PanelIcon, SunIcon } from '../shared/Icons';
+import { CalculusLabIcon, CloseIcon, MoonIcon, PanelIcon, SunIcon } from '../shared/Icons';
 
 interface HeaderProps {
   onToggleSidebar?: () => void;
@@ -17,8 +17,8 @@ export default function Header({ onToggleSidebar, sidebarOpen }: HeaderProps) {
   return (
     <header className="flex items-center justify-between border-[var(--color-border)] border-b bg-[var(--color-surface)] px-4 py-2">
       <div className="flex items-center gap-2">
-        <CalculusPadIcon className="h-6 w-6 text-[var(--color-primary)]" />
-        <h1 className="font-semibold text-[var(--color-text)] text-lg">Calculus Pad</h1>
+        <CalculusLabIcon className="h-6 w-6 text-[var(--color-primary)]" />
+        <h1 className="font-semibold text-[var(--color-text)] text-lg">Calculus Lab</h1>
       </div>
       <div className="flex items-center gap-2">
         <Link

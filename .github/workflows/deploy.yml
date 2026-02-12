@@ -65,5 +65,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: calculus-pad-extension
-          path: calculus-pad-extension.zip
+          name: calculus-lab-extension
+          path: calculus-lab-extension.zip

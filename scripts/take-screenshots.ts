@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer-core';
 
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const BASE = 'http://localhost:5000/calculus-pad/#';
+const BASE = 'http://localhost:5000/calculus-lab/#';
 
 async function main() {
   const browser = await puppeteer.launch({

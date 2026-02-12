@@ -2,7 +2,7 @@ import { expect, test } from '../fixtures/app.fixture';
 
 test.describe('Navigation', () => {
   test('redirects / to /#/scientific', async ({ calcPage, page }) => {
-    // The fixture already navigated to /calculus-pad/ which triggers redirect
+    // The fixture already navigated to /calculus-lab/ which triggers redirect
     await calcPage.goToTab('scientific');
     await expect(page).toHaveURL(/\/#\/scientific/);
   });

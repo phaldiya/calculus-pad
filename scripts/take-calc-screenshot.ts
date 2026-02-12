@@ -12,7 +12,7 @@ async function main() {
   const page = await browser.newPage();
   await page.setViewport({ width: 1400, height: 900 });
 
-  await page.goto('http://localhost:5000/calculus-pad/#/scientific', { waitUntil: 'networkidle0' });
+  await page.goto('http://localhost:5000/calculus-lab/#/scientific', { waitUntil: 'networkidle0' });
   await new Promise((r) => setTimeout(r, 1000));
 
   const clickBtn = async (text: string) => {

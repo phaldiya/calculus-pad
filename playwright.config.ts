@@ -21,13 +21,13 @@ export default defineConfig({
   },
 
   use: {
-    baseURL: `http://localhost:${PORT}/calculus-pad/`,
+    baseURL: `http://localhost:${PORT}/calculus-lab/`,
     trace: 'on-first-retry',
   },
 
   webServer: {
     command: `bun run dev -- --port ${PORT}`,
-    url: `http://localhost:${PORT}/calculus-pad/`,
+    url: `http://localhost:${PORT}/calculus-lab/`,
     reuseExistingServer: !CI,
   },
 

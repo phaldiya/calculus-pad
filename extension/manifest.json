@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Calculus Pad",
+  "name": "Calculus Lab",
   "version": "1.0.0",
   "description": "Scientific graphing calculator with calculus, matrix operations, and statistics — right in your browser sidebar.",
   "icons": {
@@ -17,7 +17,7 @@
       "16": "icons/icon-16.png",
       "48": "icons/icon-48.png"
     },
-    "default_title": "Open Calculus Pad"
+    "default_title": "Open Calculus Lab"
   },
   "background": {
     "service_worker": "service-worker.js"

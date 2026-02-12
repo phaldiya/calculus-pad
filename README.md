@@ -1,4 +1,4 @@
-# Calculus Pad
+# Calculus Lab
 
 A full-featured scientific graphing calculator built with React, TypeScript, and Plotly.js. Runs entirely in the browser — no backend required.
 
@@ -101,7 +101,7 @@ src/
 
 ## Chrome Extension (Side Panel)
 
-Calculus Pad can also run as a Chrome Extension in the browser's side panel.
+Calculus Lab can also run as a Chrome Extension in the browser's side panel.
 
 ### Build & Load
 
@@ -112,12 +112,12 @@ bun run build:extension     # build to dist-extension/
 
 1. Open `chrome://extensions` and enable **Developer mode**
 2. Click **Load unpacked** and select the `dist-extension/` directory
-3. Click the Calculus Pad icon in the toolbar to open the side panel
+3. Click the Calculus Lab icon in the toolbar to open the side panel
 
 ### Package for Chrome Web Store
 
 ```bash
-bun run extension:zip       # produces calculus-pad-extension.zip
+bun run extension:zip       # produces calculus-lab-extension.zip
 ```
 
 ## Quick Verification

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { CalculatorIcon, CalculusPadIcon, GraphIcon, IntegralIcon, MatrixIcon, StatsIcon } from './shared/Icons';
+import { CalculatorIcon, CalculusLabIcon, GraphIcon, IntegralIcon, MatrixIcon, StatsIcon } from './shared/Icons';
 
 const base = import.meta.env.BASE_URL;
 
@@ -142,8 +142,8 @@ export default function DocsPage() {
       <header className="sticky top-0 z-50 border-slate-200 border-b bg-white/80 backdrop-blur-lg dark:border-slate-800 dark:bg-slate-950/80">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <CalculusPadIcon className="h-7 w-7 text-indigo-500" />
-            <h1 className="font-bold text-slate-800 text-xl dark:text-white">Calculus Pad</h1>
+            <CalculusLabIcon className="h-7 w-7 text-indigo-500" />
+            <h1 className="font-bold text-slate-800 text-xl dark:text-white">Calculus Lab</h1>
             <span className="rounded-full bg-indigo-100 px-2 py-0.5 font-medium text-indigo-700 text-xs dark:bg-indigo-900 dark:text-indigo-300">
               Docs
             </span>
@@ -193,7 +193,7 @@ export default function DocsPage() {
                 A powerful graphing calculator in your browser
               </h2>
               <p className="max-w-2xl text-lg text-slate-500 dark:text-slate-400">
-                Calculus Pad is a full-featured mathematical toolkit built with React. Plot functions, compute derivatives
+                Calculus Lab is a full-featured mathematical toolkit built with React. Plot functions, compute derivatives
                 and integrals, perform matrix operations, and analyze statistical data — all in one place.
               </p>
             </div>
@@ -606,7 +606,7 @@ export default function DocsPage() {
           <section id="responsive" className="mb-16">
             <h2 className="mb-2 font-bold text-2xl text-slate-800 dark:text-white">Responsive Design</h2>
             <p className="mb-6 text-slate-500 dark:text-slate-400">
-              Calculus Pad adapts to any screen size. The layout adjusts across three breakpoints: mobile (&lt;768px),
+              Calculus Lab adapts to any screen size. The layout adjusts across three breakpoints: mobile (&lt;768px),
               tablet (768px&ndash;1023px), and desktop (1024px+).
             </p>
 
@@ -726,7 +726,7 @@ export default function DocsPage() {
 
             <img
               src={`${base}docs/dark-mode.png`}
-              alt="Calculus Pad in dark mode"
+              alt="Calculus Lab in dark mode"
               className="w-full rounded-xl border border-slate-200 shadow-lg dark:border-slate-700"
             />
           </section>
@@ -853,7 +853,7 @@ export default function DocsPage() {
               </span>
             </div>
             <p className="mb-6 text-slate-500 dark:text-slate-400">
-              Calculus Pad is designed and tested for WCAG 2.1 Level AAA compliance. Every interactive element is
+              Calculus Lab is designed and tested for WCAG 2.1 Level AAA compliance. Every interactive element is
               keyboard-reachable, properly labeled, and announced by screen readers.
             </p>
 
